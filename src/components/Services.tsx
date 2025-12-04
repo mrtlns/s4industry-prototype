@@ -1,13 +1,13 @@
 'use client';
 import { FadeIn } from './ui/FadeIn';
-import { Settings, Zap, Combine, Utensils } from 'lucide-react';
+import { Settings, Zap, Combine, Utensils, ArrowRight } from 'lucide-react';
+import Link from 'next/link'; // Импорт Link для перехода
 
-// Ikony dobrane do usług
 const icons = [Settings, Zap, Combine, Utensils];
 
 export default function Services({ services }: { services: any[] }) {
   return (
-    <section className="py-24 bg-gray-50">
+    <section id="services" className="py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <FadeIn>
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -20,7 +20,8 @@ export default function Services({ services }: { services: any[] }) {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Сетка карточек (кратко) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {services.map((item, idx) => {
             const Icon = icons[idx % icons.length];
             return (
@@ -29,13 +30,28 @@ export default function Services({ services }: { services: any[] }) {
                   <Icon size={28} />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-gray-900">{item.serviceTitle}</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed line-clamp-3">
+                  {/* line-clamp-3 обрезает текст, если он слишком длинный для главной */}
                   {item.serviceDescription}
                 </p>
               </FadeIn>
             );
           })}
         </div>
+
+        {/* КНОПКА "DOWIEDZ SIĘ WIĘCEJ" */}
+        <FadeIn delay={0.4}>
+          <div className="flex justify-center">
+            <Link 
+              href="/oferta" 
+              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all shadow-lg shadow-red-600/20 hover:scale-105"
+            >
+              Dowiedz się więcej
+              <ArrowRight size={20} />
+            </Link>
+          </div>
+        </FadeIn>
+
       </div>
     </section>
   );

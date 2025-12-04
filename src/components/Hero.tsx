@@ -1,29 +1,29 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Hero({ data }: { data: any }) {
   const title = data?.heroTitle || "S4 Industry";
   const subtitle = data?.heroSubtitle || "Solutions for Industry";
   const bgImage = data?.heroBackgroundImage?.sourceUrl || "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80";
 
-  // Функция скролла к контактам
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      console.log("Sekcja kontakt nie znaleziona (brak id='contact')");
     }
   };
 
   return (
     <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Tło */}
       <div className="absolute inset-0 z-0">
         <img 
           src={bgImage} 
           alt="Hero background" 
           className="w-full h-full object-cover"
         />
+        {/* Ciemny overlay */}
         <div className="absolute inset-0 bg-slate-900/70"></div>
       </div>
 
@@ -32,10 +32,17 @@ export default function Hero({ data }: { data: any }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="flex flex-col items-center"
         >
-          <div className="mb-6 flex justify-center">
-             <div className="bg-red-600 text-white font-bold p-3 rounded-lg text-xl tracking-widest border-2 border-white">
-               S4 INDUSTRY
+          <div className="mb-10 inline-flex items-center justify-center px-8 py-6 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl ring-1 ring-white/5">
+             <div className="relative w-48 h-12 md:w-64 md:h-16"> 
+               <Image 
+                 src="/logo1.png" 
+                 alt="S4 Industry Logo"
+                 fill
+                 className="object-contain" 
+                 priority
+               />
              </div>
           </div>
 

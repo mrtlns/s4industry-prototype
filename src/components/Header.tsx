@@ -2,96 +2,130 @@
 import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const links = [
-  { name: 'O nas', href: '#about' },
-  { name: 'Galeria', href: '#gallery' },
-  { name: 'Oferta', href: '#services' },
-  { name: 'Kontakt', href: '#contact' },
+  { name: 'O nas', href: '/#about' },
+  { name: 'Galeria', href: '/#gallery' },
+  { name: 'Oferta', href: '/oferta' },
+  { name: 'Kontakt', href: '/#contact' },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false); // Новое состояние: Скрыт ли хедер?
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  
   const { scrollY } = useScroll();
+  const pathname = usePathname();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 50);
+    const previous = scrollY.getPrevious() || 0;
+
+    if (latest > 50) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+
+    // 2. Логика Скрытия/Появления (Smart Header)
+    if (latest > previous && latest > 150) {
+      // Если листаем ВНИЗ и мы уже пролистали больше 150px -> Скрываем
+      setIsHidden(true);
+      setIsMobileOpen(false); // Закрываем мобильное меню при скролле вниз
+    } else {
+      // Если листаем ВВЕРХ или мы в самом верху -> Показываем
+      setIsHidden(false);
+    }
   });
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsMobileOpen(false);
-    
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('/#')) {
+        setIsMobileOpen(false);
+        return; 
+    }
+
+    if (pathname === '/') {
+        e.preventDefault();
+        setIsMobileOpen(false);
+        const targetId = href.replace('/#', '');
+        const element = document.getElementById(targetId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
     } else {
-      console.warn(`Element with id ${targetId} not found`);
+        setIsMobileOpen(false);
     }
   };
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out transform ${
+        isHidden ? '-translate-y-full' : 'translate-y-0'
+      } ${
+        isScrolled 
+          ? 'bg-red-600 shadow-sm py-2' 
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         
-        {/* Логотип */}
-        <a href="#hero" onClick={(e) => scrollToSection(e, '#hero')} className="flex items-center gap-2 group cursor-pointer">
-          <div className="bg-red-600 text-white font-bold p-2 rounded text-lg tracking-widest border-2 border-white group-hover:bg-red-700 transition-colors">
-            S4
-          </div>
-          <span className={`font-bold text-xl tracking-tight ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-            INDUSTRY
-          </span>
-        </a>
+        <Link href="/" className="relative block cursor-pointer group">
+           <div className={`relative transition-all duration-300 ${
+             isScrolled ? 'w-36 h-10' : 'w-48 h-12 md:w-56 md:h-14'
+           }`}>
+             <Image 
+               src="/logo1.png" 
+               alt="S4 Industry Logo" 
+               fill 
+               className="object-contain object-left" 
+               priority
+             />
+           </div>
+        </Link>
 
-        {/* Десктоп Меню */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* MENU DESKTOP */}
+        <nav className="hidden md:flex items-center gap-6">
           {links.map((link) => (
-            <a 
+            <Link 
               key={link.name}
               href={link.href}
-              onClick={(e) => scrollToSection(e, link.href)}
-              className={`text-sm font-medium uppercase tracking-wider hover:text-red-600 transition-colors cursor-pointer ${
-                isScrolled ? 'text-gray-700' : 'text-gray-200'
-              }`}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="text-xs md:text-sm font-bold uppercase tracking-wider text-white hover:text-gray-200 transition-colors cursor-pointer relative group"
             >
               {link.name}
-            </a>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+            </Link>
           ))}
         </nav>
 
-        {/* Мобильная кнопка */}
+        {/* MOBILE BUTTON */}
         <button 
-          className="md:hidden text-2xl"
+          className="md:hidden text-2xl text-white"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
-          {isMobileOpen ? <X className={isScrolled ? 'text-black' : 'text-white'} /> : <Menu className={isScrolled ? 'text-black' : 'text-white'} />}
+          {isMobileOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Мобильное меню */}
+      {/* MENU MOBILE */}
       {isMobileOpen && (
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 p-4 shadow-xl md:hidden flex flex-col gap-4"
+          className="absolute top-full left-0 right-0 bg-red-700 border-t border-red-500 p-4 shadow-2xl md:hidden flex flex-col gap-4"
         >
           {links.map((link) => (
-            <a 
+            <Link 
               key={link.name}
               href={link.href}
-              onClick={(e) => scrollToSection(e, link.href)}
-              className="text-gray-800 text-lg font-medium py-2 border-b border-gray-50"
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="text-white text-lg font-medium py-2 border-b border-red-500 hover:text-red-200 transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </motion.div>
       )}

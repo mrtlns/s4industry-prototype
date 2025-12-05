@@ -1,9 +1,7 @@
 import Header from '@/components/Header';
 import Contact from '@/components/Contact';
-import DetailedServices from '@/components/DetailedServices'; // Импортируем новый компонент
+import DetailedServices from '@/components/DetailedServices';
 
-// Дублируем данные или выносим их в отдельный файл (lib/data.ts)
-// Для простоты я вставил их сюда, но с путями к картинкам
 const OFFER_DATA = [
     { 
       serviceTitle: "Przyrządy montażowe", 
@@ -39,8 +37,6 @@ export default function OfferPage() {
   return (
     <main className="min-h-screen bg-white">
       <Header />
-      
-      {/* Небольшой Hero блок для внутренней страницы */}
       <div className="bg-slate-900 pt-32 pb-16 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Nasza Oferta</h1>
         <p className="text-gray-400 max-w-2xl mx-auto px-4">

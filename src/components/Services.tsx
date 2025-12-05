@@ -1,7 +1,7 @@
 'use client';
 import { FadeIn } from './ui/FadeIn';
 import { Settings, Zap, Combine, Utensils, ArrowRight } from 'lucide-react';
-import Link from 'next/link'; // Импорт Link для перехода
+import Link from 'next/link';
 
 const icons = [Settings, Zap, Combine, Utensils];
 
@@ -20,26 +20,28 @@ export default function Services({ services }: { services: any[] }) {
           </div>
         </FadeIn>
 
-        {/* Сетка карточек (кратко) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        {/* Сетка карточек */}
+        {/* Добавил 'items-stretch' чтобы карточки тянулись по высоте */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 auto-rows-fr">
           {services.map((item, idx) => {
             const Icon = icons[idx % icons.length];
             return (
-              <FadeIn key={idx} delay={idx * 0.1} className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-start">
-                <div className="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                  <Icon size={28} />
+              // Добавил 'h-full'
+              <FadeIn key={idx} delay={idx * 0.1} className="h-full">
+                <div className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-start h-full">
+                  <div className="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                    <Icon size={28} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3 text-gray-900">{item.serviceTitle}</h3>
+                  <p className="text-gray-600 leading-relaxed line-clamp-3 flex-grow">
+                    {item.serviceDescription}
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">{item.serviceTitle}</h3>
-                <p className="text-gray-600 leading-relaxed line-clamp-3">
-                  {/* line-clamp-3 обрезает текст, если он слишком длинный для главной */}
-                  {item.serviceDescription}
-                </p>
               </FadeIn>
             );
           })}
         </div>
 
-        {/* КНОПКА "DOWIEDZ SIĘ WIĘCEJ" */}
         <FadeIn delay={0.4}>
           <div className="flex justify-center">
             <Link 

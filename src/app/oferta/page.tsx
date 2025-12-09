@@ -17,7 +17,7 @@ const OFFER_DATA = [
       serviceTitle: "Przenośniki taśmowe", 
       serviceDescription: "Przenośniki taśmowe są wykorzystywane do transportu komponentów w środowisku produkcyjnym. Ze względu na częsty kontakt z operatorami, muszą spełniać najwyższe standardy bezpieczeństwa. Kształt i wymiary przenośników są dostosowywane do indywidualnych wymagań klientów.",
       specialization: "Specjalizujemy się w przenośnikach wznoszących, które wyposażone są w kosz zasypowy, służący do „zasilania” podajników wibracyjnych na liniach produkcyjnych. Oferujemy również przenośniki proste, które są dostępne w naszej ofercie.",
-      image: "/service-3.png"
+      image: "/firma/4.png"
     },
     { 
       serviceTitle: "Rozwiązania dla przemysłu spożywczego", 
@@ -38,7 +38,7 @@ export default function OfferPage() {
     <main className="min-h-screen bg-white">
       <Header />
       <div className="bg-slate-900 pt-32 pb-16 text-center text-white">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Nasza Oferta</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Nasza oferta</h1>
         <p className="text-gray-400 max-w-2xl mx-auto px-4">
           Poznaj szczegóły naszych rozwiązań technologicznych.
         </p>

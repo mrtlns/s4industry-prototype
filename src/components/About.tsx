@@ -44,7 +44,7 @@ export default function About({ data }: { data: any }) {
             <FadeIn delay={0.2}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
                 <img 
-                  src="https://www.datocms-assets.com/38028/1660154352-reliability-engineer-inspecting-machine.jpg?auto=format" 
+                  src="https://techspaw.com.pl/wp-content/uploads/2021/02/kospel4.jpg" 
                   alt="Engineering" 
                   className="w-full h-full object-cover aspect-square md:aspect-video"
                 />

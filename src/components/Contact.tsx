@@ -3,8 +3,15 @@ import { FadeIn } from './ui/FadeIn';
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 
 export default function Contact({ data }: { data: any }) {
-  // Adres do zapytania Google Maps
-  const mapQuery = encodeURIComponent("Tatów 5GE, 76-039 Biesiekierz");
+  // 1. Adres do wyszukiwania
+  const address = "Tatów 5GE, 76-039 Biesiekierz";
+  
+  // 2. Parametry mapy:
+  // q = zapytanie (adres)
+  // t = m (typ mapy: zwykła)
+  // z = 12 (ZOOM - im mniejsza liczba, tym widok jest szerszy. 12 pozwoli zobaczyć Koszalin)
+  // output = embed (wymagane dla iframe)
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=m&z=12&output=embed&iwloc=near`;
 
   return (
     <section id="contact" className="py-24 bg-slate-900 text-white relative overflow-hidden">
@@ -88,10 +95,8 @@ export default function Contact({ data }: { data: any }) {
                   style={{ border: 0, minHeight: '400px' }}
                   loading="lazy" 
                   allowFullScreen
-                  // Usunąłem klasę 'grayscale', żeby pinezka była czerwona i widoczna
                   className="w-full h-full rounded-2xl"
-                  // Tutaj jest poprawiony link generujący pinezkę z adresu
-                  src={`https://maps.google.com/maps?q=${mapQuery}&t=m&z=15&output=embed&iwloc=near`}
+                  src={mapSrc}
                 ></iframe>
              </FadeIn>
           </div>

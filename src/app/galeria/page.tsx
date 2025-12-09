@@ -2,16 +2,23 @@ import Header from '@/components/Header';
 import Contact from '@/components/Contact';
 import DetailedGallery from '@/components/DetailedGallery';
 
+// Twoje zdjęcia z folderu public
 const GALLERY_IMAGES = [
-  "https://hgrobotics.pl/wp-content/uploads/2021/12/zakrecarka_Easy-Resize.com_-1024x682.jpg", 
-  "https://p-zm.com/wp-content/uploads/2021/09/AdobeStock_273751484-linia-produkcyjna.jpg",
-  "https://d2yvmenv39glx3.cloudfront.net/images/f-107883-jakie-sa-maszyny-przemyslowe.jpg",
-  "https://eshield.pl/wp-content/uploads/2025/07/linie-produkcyjne-i-technologiczne-02-1024x683.jpeg",
-  "https://p-zm.com/wp-content/uploads/2021/09/20190206_095259-maszyna-do-skladania-zbiornikow-1024x683.jpg",
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1565514020125-99d7f02378c8?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&q=80"
+  "/firma/1.png",
+  "/firma/2.png",
+  "/firma/3.png",
+  "/firma/4.png",
+  "/firma/5.png",
+  "/firma/6.png",
+  "/firma/7.png",
+  "/firma/8.png",
+  "/firma/9.png",
+  "/firma/10.png",
+  "/firma/11.png",
+  "/firma/12.png",
+  "/firma/13.png",
+  "/firma/14.png",
+  "/firma/15.png"
 ];
 
 const CONTACT_DATA = {

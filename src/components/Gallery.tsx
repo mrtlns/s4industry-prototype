@@ -8,13 +8,12 @@ import Link from 'next/link';
 
 export default function Gallery({ images = [] }: { images?: string[] }) {
   
-  // Фолбэк картинки
   const sliderImages = images.length > 0 ? images : [
-     "https://hgrobotics.pl/wp-content/uploads/2021/12/zakrecarka_Easy-Resize.com_-1024x682.jpg", 
-     "https://p-zm.com/wp-content/uploads/2021/09/AdobeStock_273751484-linia-produkcyjna.jpg",
-     "https://d2yvmenv39glx3.cloudfront.net/images/f-107883-jakie-sa-maszyny-przemyslowe.jpg",
-     "https://eshield.pl/wp-content/uploads/2025/07/linie-produkcyjne-i-technologiczne-02-1024x683.jpeg",
-     "https://p-zm.com/wp-content/uploads/2021/09/20190206_095259-maszyna-do-skladania-zbiornikow-1024x683.jpg"
+     "/firma/1.png", 
+     "/firma/2.png",
+     "/firma/3.png",
+     "/firma/4.png",
+     "/firma/5.png"
   ];
 
   const [index, setIndex] = useState(0);
@@ -67,18 +66,14 @@ export default function Gallery({ images = [] }: { images?: string[] }) {
                 dragElastic={0.2}
                 onDragStart={() => setDragging(true)}
                 onDragEnd={onDragEnd}
-                // --- ГЛАВНОЕ ИСПРАВЛЕНИЕ ЗДЕСЬ ---
-                // Мы делим 100% на количество картинок, чтобы сдвигать ровно на один слайд
                 animate={{ x: `-${index * (100 / sliderImages.length)}%` }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                // Ширина контейнера = 100% * количество картинок
                 style={{ width: `${sliderImages.length * 100}%` }}
                 className="flex cursor-grab active:cursor-grabbing h-full"
               >
                 {sliderImages.map((src, idx) => (
                   <div 
                     key={idx} 
-                    // Каждый слайд занимает равную долю ширины
                     style={{ width: `${100 / sliderImages.length}%` }}
                     className="h-full relative flex-shrink-0"
                   >

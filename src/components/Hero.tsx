@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function Hero({ data }: { data: any }) {
-  const title = data?.heroTitle || "S4 Industry";
   const subtitle = data?.heroSubtitle || "Solutions for Industry";
   const bgImage = data?.heroBackgroundImage?.sourceUrl || "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80";
 
@@ -34,10 +33,12 @@ export default function Hero({ data }: { data: any }) {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center"
         >
-          <div className="mb-10 inline-flex items-center justify-center px-8 py-6 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl ring-1 ring-white/5">
-             <div className="relative w-48 h-12 md:w-64 md:h-16"> 
+          {/* --- LOGO BEZ KAPSUŁY (DUŻE) --- */}
+          <div className="mb-8 flex justify-center">
+             {/* Zwiększyłem wymiary: width 600px na desktopie */}
+             <div className="relative w-80 h-28 md:w-[600px] md:h-48"> 
                <Image 
-                 src="/logo1.png" 
+                 src="/logo_3.png" // Upewnij się, że to plik BEZ tła (przezroczysty)
                  alt="S4 Industry Logo"
                  fill
                  className="object-contain" 
@@ -45,10 +46,6 @@ export default function Hero({ data }: { data: any }) {
                />
              </div>
           </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
-            {title}
-          </h1>
           
           <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
             {subtitle}

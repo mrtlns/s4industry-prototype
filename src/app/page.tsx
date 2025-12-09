@@ -8,11 +8,11 @@ import Gallery from '@/components/Gallery';
 export const revalidate = 60; 
 
 const MOCK_DATA = {
-  heroTitle: "S4 Industry Solutions",
+  heroTitle: "",
   heroSubtitle: "Innowacje w Produkcji. Od pomysłu aż po wdrożenie.",
   heroCtaText: "Skontaktuj się",
   heroBackgroundImage: {
-    sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80"
+    sourceUrl: "https://p-zm.com/wp-content/uploads/2021/09/AdobeStock_273751484-linia-produkcyjna-1024x683.jpg"
   },
   
   aboutTitle: "S4 Industry – Innowacje w Produkcji",

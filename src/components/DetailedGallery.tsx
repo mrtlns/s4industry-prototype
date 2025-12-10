@@ -20,7 +20,7 @@ export default function DetailedGallery({ images }: { images: string[] }) {
                 Portfolio
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-                Nasze Realizacje
+                Nasze realizacje
               </h2>
               <p className="text-gray-500 mt-4">
                 Zobacz efekty naszej pracy w różnych sektorach przemysłu.

@@ -6,7 +6,7 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'S4 Industry Solutions',
+  title: 'S4 Industry',
   description: 'Innowacje w Produkcji. Od pomysłu aż po wdrożenie.',
 };
 

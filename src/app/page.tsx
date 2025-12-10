@@ -48,8 +48,16 @@ const MOCK_DATA = {
   contactInfo: {
     address: "Tatów 5GE, 76-039 Biesiekierz",
     phone: "+48 792 782 777",
+    phone2: "+48 509 261 395",
     email: "s4i.poland@gmail.com",
-    hours: "Poniedziałek - Piątek: 8:00 - 16:00"
+    hours: "Poniedziałek - Piątek: 8:00 - 16:00",
+    invoiceData: {
+      name: "S4 Industry Dawid Zieliński",
+      address: "Ul. Żytnia 34E/10",
+      postcode: "75-818 Koszalin",
+      nip: "673 178 31 55",
+      regon: "388286174"
+    }
   }
 };
 

@@ -1,10 +1,13 @@
-import Header from '@/components/Header';  // <--- TEGO BRAKOWAŁO!
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Gallery from '@/components/Gallery';
 import Services from '@/components/Services';
 import Contact from '@/components/Contact';
 import { getContactData } from '@/lib/wordpress'; 
+
+// 👇 MAGIA ISR: Odświeżanie strony co 60 sekund (aby zaciągnąć nowe dane z WP)
+export const revalidate = 60;
 
 // DANE ZAPASOWE (Dla sekcji Hero, About, Services - których jeszcze nie ma w WP)
 const STATIC_DATA = {
@@ -44,7 +47,7 @@ const STATIC_DATA = {
   ]
 };
 
-// DANE ZAPASOWE DLA KONTAKTU
+// DANE ZAPASOWE DLA KONTAKTU (Fallback)
 const FALLBACK_CONTACT = {
   address: "Tatów 5GE, 76-039 Biesiekierz",
   phone: "+48 792 782 777",
@@ -61,8 +64,8 @@ const FALLBACK_CONTACT = {
 };
 
 export default async function Home() {
-  // 1. Pobieramy dane kontaktowe z WordPress
-  const wpContactData = await getContactData();
+  // 1. Pobieramy dane kontaktowe z WordPress (z obsługą błędów)
+  const wpContactData: any = await getContactData();
 
   // 2. Łączymy dane (jeśli WP nie odpowie, używamy zapasowych)
   const contactInfo = {
@@ -95,7 +98,7 @@ export default async function Home() {
       <About data={STATIC_DATA} />
       <Gallery images={sliderImages} />
       <Services services={STATIC_DATA.services} />
-      {/* Przekazujemy dane z WordPress do kontaktu */}
+      {/* Przekazujemy dane do kontaktu (z WP lub fallback) */}
       <Contact data={contactInfo} />
     </main>
   );

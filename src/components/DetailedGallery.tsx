@@ -2,11 +2,10 @@
 import { useState } from 'react';
 import { FadeIn } from './ui/FadeIn';
 import Image from 'next/image';
-import { ZoomIn, X } from 'lucide-react'; // Добавили иконку X
-import { motion, AnimatePresence } from 'framer-motion'; // Для анимации открытия
+import { ZoomIn, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function DetailedGallery({ images }: { images: string[] }) {
-  // Состояние: какая картинка сейчас открыта (null = никакая)
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
@@ -28,7 +27,6 @@ export default function DetailedGallery({ images }: { images: string[] }) {
             </div>
           </FadeIn>
 
-          {/* SIATKA ZDJĘĆ */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {images.map((src, idx) => (
               <FadeIn 
@@ -36,7 +34,6 @@ export default function DetailedGallery({ images }: { images: string[] }) {
                 delay={idx * 0.05} 
                 className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md border border-gray-100 aspect-[4/3]"
               >
-                {/* ОБРАБОТЧИК КЛИКА - ОТКРЫВАЕМ ФОТО */}
                 <div onClick={() => setSelectedImage(src)} className="w-full h-full relative">
                   <Image 
                     src={src} 
@@ -45,7 +42,6 @@ export default function DetailedGallery({ images }: { images: string[] }) {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
 
-                  {/* OVERLAY */}
                   <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/40 transition-colors duration-300 flex items-center justify-center">
                     <div className="bg-white/10 backdrop-blur-md p-3 rounded-full opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                       <ZoomIn className="text-white w-8 h-8" />
@@ -59,18 +55,15 @@ export default function DetailedGallery({ images }: { images: string[] }) {
         </div>
       </section>
 
-      {/* --- МОДАЛЬНОЕ ОКНО (LIGHTBOX) --- */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // При клике на фон - закрываем
             onClick={() => setSelectedImage(null)}
             className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
           >
-            {/* Кнопка Закрыть */}
             <button 
               className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 p-2 rounded-full z-50"
               onClick={() => setSelectedImage(null)}
@@ -78,7 +71,6 @@ export default function DetailedGallery({ images }: { images: string[] }) {
               <X size={32} />
             </button>
 
-            {/* Большая картинка */}
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

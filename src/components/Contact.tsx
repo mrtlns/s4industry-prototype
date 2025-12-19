@@ -1,14 +1,10 @@
 'use client';
 import { FadeIn } from './ui/FadeIn';
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, FileText } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 
 export default function Contact({ data }: { data: any }) {
-  // Używamy współrzędnych geograficznych Tatowa, aby wymusić "Szpilkę"
-  // Adres tekstowy czasami pokazuje tylko obszar wioski bez kropki.
   const lat = "54.1722";
   const lng = "16.0822";
-  
-  // Parametr 'q' ze współrzędnymi gwarantuje czerwoną pinezkę w centrum
   const mapSrc = `https://maps.google.com/maps?q=${lat},${lng}&hl=pl&z=12&output=embed`;
 
   return (
@@ -37,7 +33,7 @@ export default function Contact({ data }: { data: any }) {
                   </div>
                 </div>
 
-                {/* Telefony (Obsługa dwóch numerów) */}
+                {/* Telefony */}
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-red-600 rounded-lg shrink-0">
                     <Phone className="w-6 h-6" />
@@ -73,20 +69,20 @@ export default function Contact({ data }: { data: any }) {
                   </div>
                 </div>
 
-                {/* --- DANE DO FAKTUROWANIA (NOWE) --- */}
+                {/* --- DANE DO FAKTUROWANIA (Версия "Стильно и полупрозрачно") --- */}
                 {data.invoiceData && (
-                  <div className="mt-8 p-6 bg-slate-800/50 border border-slate-700 rounded-xl relative group hover:border-red-600/30 transition-colors">
-                    <div className="flex items-center gap-3 mb-4">
-                      <FileText className="text-red-500 w-5 h-5" />
-                      <h3 className="text-lg font-semibold text-white">Dane do fakturowania</h3>
-                    </div>
-                    <div className="text-slate-300 space-y-1 text-sm font-mono leading-relaxed">
-                      <p className="font-bold text-white text-base">{data.invoiceData.name}</p>
+                  // Убрали ячейку (bg-..., border-...). Добавили большой отступ сверху (mt-12).
+                  <div className="mt-12">
+                    {/* Используем очень приглушенный цвет (slate-500) и моноширинный шрифт */}
+                    <div className="text-slate-500 text-sm font-mono leading-relaxed">
+                      {/* Название фирмы чуть ярче (slate-400), но не белое */}
+                      <p className="font-medium text-slate-400 text-base mb-2">{data.invoiceData.name}</p>
                       <p>{data.invoiceData.address}</p>
                       <p>{data.invoiceData.postcode}</p>
-                      <div className="mt-3 pt-3 border-t border-slate-700/50">
-                        <p>NIP: <span className="text-white">{data.invoiceData.nip}</span></p>
-                        <p>REGON: <span className="text-white">{data.invoiceData.regon}</span></p>
+                      {/* Сами цифры NIP/REGON чуть ярче для читаемости */}
+                      <div className="mt-4 space-y-1">
+                        <p>NIP: <span className="text-slate-400">{data.invoiceData.nip}</span></p>
+                        <p>REGON: <span className="text-slate-400">{data.invoiceData.regon}</span></p>
                       </div>
                     </div>
                   </div>

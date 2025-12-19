@@ -18,7 +18,9 @@ const GALLERY_IMAGES = [
   "/firma/12.png",
   "/firma/13.png",
   "/firma/14.png",
-  "/firma/15.png"
+  "/firma/15.png",
+  "/firma/16.jpg",
+  "/firma/17.png",
 ];
 
 const CONTACT_DATA = {

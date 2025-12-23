@@ -1,9 +1,11 @@
 import Header from '@/components/Header';
 import Contact from '@/components/Contact';
 import DetailedGallery from '@/components/DetailedGallery';
+import { getContactData } from '@/lib/wordpress'; 
 
-// Twoje zdjęcia z folderu public
-const GALLERY_IMAGES = [
+export const revalidate = 60;
+
+const STATIC_GALLERY_IMAGES = [
   "/firma/1.png",
   "/firma/2.png",
   "/firma/3.png",
@@ -23,7 +25,7 @@ const GALLERY_IMAGES = [
   "/firma/17.png",
 ];
 
-const CONTACT_DATA = {
+const FALLBACK_CONTACT = {
     address: "Tatów 5GE, 76-039 Biesiekierz",
     phone: "+48 792 782 777",
     phone2: "509 261 395",
@@ -38,12 +40,33 @@ const CONTACT_DATA = {
     }
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+
+  const wpData: any = await getContactData();
+
+  const wpImages = wpData?.gallery || [];
+
+  const finalGalleryImages = [...STATIC_GALLERY_IMAGES, ...wpImages];
+
+  const contactInfo = {
+    address: wpData?.officeAddress || FALLBACK_CONTACT.address,
+    phone: wpData?.phoneMain || FALLBACK_CONTACT.phone,
+    phone2: wpData?.phoneSecondary || FALLBACK_CONTACT.phone2,
+    email: wpData?.emailAddress || FALLBACK_CONTACT.email,
+    hours: FALLBACK_CONTACT.hours,
+    invoiceData: {
+      name: wpData?.invoiceData?.companyName || FALLBACK_CONTACT.invoiceData.name,
+      address: wpData?.invoiceData?.street || FALLBACK_CONTACT.invoiceData.address,
+      postcode: wpData?.invoiceData?.postcodeCity || FALLBACK_CONTACT.invoiceData.postcode,
+      nip: wpData?.invoiceData?.nip || FALLBACK_CONTACT.invoiceData.nip,
+      regon: wpData?.invoiceData?.regon || FALLBACK_CONTACT.invoiceData.regon,
+    }
+  };
+
   return (
     <main className="min-h-screen bg-white">
       <Header />
       
-      {/* Header podstrony */}
       <div className="bg-slate-900 pt-32 pb-16 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Galeria</h1>
         <p className="text-gray-400 max-w-2xl mx-auto px-4">
@@ -51,8 +74,9 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      <DetailedGallery images={GALLERY_IMAGES} />
-      <Contact data={CONTACT_DATA} />
+      <DetailedGallery images={finalGalleryImages} />
+      
+      <Contact data={contactInfo} />
     </main>
   );
 }

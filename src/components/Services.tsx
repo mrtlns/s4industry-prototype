@@ -20,13 +20,10 @@ export default function Services({ services }: { services: any[] }) {
           </div>
         </FadeIn>
 
-        {/* Сетка карточек */}
-        {/* Добавил 'items-stretch' чтобы карточки тянулись по высоте */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 auto-rows-fr">
           {services.map((item, idx) => {
             const Icon = icons[idx % icons.length];
             return (
-              // Добавил 'h-full'
               <FadeIn key={idx} delay={idx * 0.1} className="h-full">
                 <div className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col items-start h-full">
                   <div className="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 flex-shrink-0">

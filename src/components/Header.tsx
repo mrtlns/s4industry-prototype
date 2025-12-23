@@ -15,7 +15,7 @@ const links = [
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false); // Новое состояние: Скрыт ли хедер?
+  const [isHidden, setIsHidden] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   
   const { scrollY } = useScroll();
@@ -30,13 +30,10 @@ export default function Header() {
       setIsScrolled(false);
     }
 
-    // 2. Логика Скрытия/Появления (Smart Header)
     if (latest > previous && latest > 150) {
-      // Если листаем ВНИЗ и мы уже пролистали больше 150px -> Скрываем
       setIsHidden(true);
-      setIsMobileOpen(false); // Закрываем мобильное меню при скролле вниз
+      setIsMobileOpen(false);
     } else {
-      // Если листаем ВВЕРХ или мы в самом верху -> Показываем
       setIsHidden(false);
     }
   });
@@ -86,7 +83,6 @@ export default function Header() {
            </div>
         </Link>
 
-        {/* MENU DESKTOP */}
         <nav className="hidden md:flex items-center gap-6">
           {links.map((link) => (
             <Link 
@@ -101,7 +97,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* MOBILE BUTTON */}
         <button 
           className="md:hidden text-2xl text-white"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -110,7 +105,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* MENU MOBILE */}
       {isMobileOpen && (
         <motion.div 
           initial={{ opacity: 0, y: -20 }}

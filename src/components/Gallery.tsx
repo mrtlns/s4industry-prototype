@@ -58,7 +58,6 @@ export default function Gallery({ images = [] }: { images?: string[] }) {
         <FadeIn delay={0.2}>
           <div className="relative group max-w-5xl mx-auto mb-12">
             
-            {/* ОКНО ПРОСМОТРА */}
             <div className="overflow-hidden rounded-2xl shadow-2xl border border-gray-100 bg-gray-100 aspect-video md:aspect-[16/9] lg:h-[600px]">
               <motion.div
                 drag="x"
@@ -88,7 +87,6 @@ export default function Gallery({ images = [] }: { images?: string[] }) {
               </motion.div>
             </div>
 
-            {/* Стрелки */}
             <button onClick={prevStep} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/90 hover:text-red-600 text-white backdrop-blur-md p-3 rounded-full transition-all opacity-0 group-hover:opacity-100 z-10">
               <ChevronLeft size={32} />
             </button>

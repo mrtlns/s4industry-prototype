@@ -9,9 +9,7 @@ export function Providers({ children }: { children: any }) {
   const lenisRef = useRef<any>(null);
 
   useEffect(() => {
-    // Эта магия срабатывает при смене страницы (пути)
     if (lenisRef.current?.lenis) {
-      // Мгновенно (immediate: true) перебрасываем скролл в начало (0)
       lenisRef.current.lenis.scrollTo(0, { immediate: true });
     }
   }, [pathname]);

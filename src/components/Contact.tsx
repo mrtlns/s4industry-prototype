@@ -69,17 +69,12 @@ export default function Contact({ data }: { data: any }) {
                   </div>
                 </div>
 
-                {/* --- DANE DO FAKTUROWANIA (Версия "Стильно и полупрозрачно") --- */}
                 {data.invoiceData && (
-                  // Убрали ячейку (bg-..., border-...). Добавили большой отступ сверху (mt-12).
                   <div className="mt-12">
-                    {/* Используем очень приглушенный цвет (slate-500) и моноширинный шрифт */}
                     <div className="text-slate-500 text-sm font-mono leading-relaxed">
-                      {/* Название фирмы чуть ярче (slate-400), но не белое */}
                       <p className="font-medium text-slate-400 text-base mb-2">{data.invoiceData.name}</p>
                       <p>{data.invoiceData.address}</p>
                       <p>{data.invoiceData.postcode}</p>
-                      {/* Сами цифры NIP/REGON чуть ярче для читаемости */}
                       <div className="mt-4 space-y-1">
                         <p>NIP: <span className="text-slate-400">{data.invoiceData.nip}</span></p>
                         <p>REGON: <span className="text-slate-400">{data.invoiceData.regon}</span></p>
@@ -88,7 +83,6 @@ export default function Contact({ data }: { data: any }) {
                   </div>
                 )}
 
-                {/* Social Media */}
                 <div className="pt-6 mt-6">
                    <h3 className="text-lg font-semibold mb-4 text-slate-400">Znajdź nas</h3>
                    <div className="flex gap-4">
@@ -105,7 +99,6 @@ export default function Contact({ data }: { data: any }) {
             </FadeIn>
           </div>
 
-          {/* PRAWA STRONA: Mapa */}
           <div className="h-full min-h-[500px] bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 relative shadow-2xl">
              <FadeIn delay={0.2} className="h-full">
                 <iframe 

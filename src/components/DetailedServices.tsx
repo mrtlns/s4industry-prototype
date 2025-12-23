@@ -25,7 +25,6 @@ export default function DetailedServices({ services }: { services: any[] }) {
             return (
               <div key={idx} className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
                 
-                {/* ФОТО */}
                 <div className="w-full lg:w-1/2">
                   <FadeIn delay={0.2} className="relative group">
                     <div className="relative h-[300px] md:h-[400px] w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
@@ -40,7 +39,6 @@ export default function DetailedServices({ services }: { services: any[] }) {
                   </FadeIn>
                 </div>
 
-                {/* ТЕКСТ */}
                 <div className="w-full lg:w-1/2">
                   <FadeIn>
                     <h3 className="text-3xl font-bold mb-6 text-gray-900 relative inline-block">

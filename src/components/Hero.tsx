@@ -33,12 +33,10 @@ export default function Hero({ data }: { data: any }) {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center"
         >
-          {/* --- LOGO BEZ KAPSUŁY (DUŻE) --- */}
           <div className="mb-8 flex justify-center">
-             {/* Zwiększyłem wymiary: width 600px na desktopie */}
              <div className="relative w-80 h-28 md:w-[600px] md:h-48"> 
                <Image 
-                 src="/logo_3.png" // Upewnij się, że to plik BEZ tła (przezroczysty)
+                 src="/logo_3.png"
                  alt="S4 Industry Logo"
                  fill
                  className="object-contain" 
